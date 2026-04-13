@@ -29,7 +29,6 @@ export function useUsersTable(users: userType[]) {
         perPage: perPage.value,
       },
     });
-    page.value = 1;
   });
 
   const filteredUsers = computed(() => {
