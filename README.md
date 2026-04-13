@@ -25,3 +25,7 @@ npm run dev
 ```
 
 Відкрити: `http://localhost:3000`
+
+## Збілджений проект можна відкрити по посиланню
+
+`test-pagination-three.vercel.app`
