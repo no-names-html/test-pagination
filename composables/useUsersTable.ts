@@ -6,7 +6,7 @@ export function useUsersTable(users: userType[]) {
 
   // filters
 
-  const search = ref("");
+  const search = ref(route.query.search || "");
   const role = ref(route.query.role || null);
 
   // sorting
@@ -19,10 +19,15 @@ export function useUsersTable(users: userType[]) {
   const page = ref(Number(route.query.page) || 1);
   const perPage = ref(Number(route.query.perPage) || 10);
 
-  watch([role, sortDirection, page, sortBy, perPage], () => {
+  watch(perPage, () => {
+    page.value = 1;
+  });
+
+  watch([role, search, sortDirection, page, sortBy, perPage], () => {
     router.replace({
       query: {
         role: role.value,
+        search: search.value,
         sortDirection: sortDirection.value,
         page: page.value,
         sortBy: sortBy.value,
@@ -79,8 +84,6 @@ export function useUsersTable(users: userType[]) {
 
     return sortDirection.value == "asc" ? result : -result;
   };
-
-  const tableS = ref();
 
   return {
     search,
