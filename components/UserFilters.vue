@@ -9,8 +9,10 @@
         >
           🔍
         </button>
+        <!-- v-model="search" -->
         <input
           v-else
+          :value="search"
           ref="searchInput"
           class="inputStyle"
           placeholder="Search by name or email"
@@ -33,7 +35,7 @@
 import themeBlock from "./themeBlock.vue";
 
 const { search, role } = inject("usersTable");
-defineEmits([, "update:role"]);
+defineEmits([, "update:role", "update;search"]);
 
 const isSearchOpen = ref(false);
 const searchInput = ref(null);
@@ -46,13 +48,13 @@ const openSearch = () => {
 
 const closeSearch = () => {
   isSearchOpen.value = false;
-  search.value = "";
 };
 
 const setSearchWithDelay = (value) => {
   if (delay.value != null) clearTimeout(delay.value);
   delay.value = setTimeout(() => {
     search.value = value;
+    $emit("update:search", value);
   }, 500);
 };
 

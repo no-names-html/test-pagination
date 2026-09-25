@@ -1,6 +1,9 @@
 <template>
   <div class="page">
-    <UserFilters @update:role="role = $event" />
+    <UserFilters
+      @update:role="role = $event"
+      @update:search="search = $event"
+    />
 
     <UserTable :users="getUsers" :header="table_header" />
   </div>
